@@ -1,24 +1,50 @@
-import React from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Ws from '@adonisjs/websocket-client';
 
 function App() {
+  
+
+  const [messages, setMessages] = useState([]);
+  const [message, setMessage] = useState('');
+  const chat = useRef(null);
+  const ws = useRef(null);
+
+  useEffect(() => {
+    ws.current = Ws('ws://localhost:3333', {
+      path: 'ws'
+    })
+
+    ws.current.connect();
+   
+    chat.current = ws.current.subscribe("chat");
+    chat.current.on("message", (data) => {
+      console.log('iniiiii');
+    });
+  }, []);
+
+  function sendMessage() {            
+    chat.current.emit("message", message);
+    messages.push(message);
+    console.log(messages);
+
+    setMessage('');
+  }
+
+
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      
+       <input type="text" 
+              placeholder="Mensagem"
+              value={message}
+              name="Message"
+              onChange={e => setMessage(e.target.value)}
+        ></input>
+        <button onClick={sendMessage}>Enviar</button>
     </div>
   );
 }
