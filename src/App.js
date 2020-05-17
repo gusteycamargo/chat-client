@@ -1,7 +1,5 @@
-import React, { useEffect, useState, useRef } from 'react';
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
 import './App.css';
-import Ws from '@adonisjs/websocket-client';
 import { connect, disconnect, subscribeToChat, sendMessage } from './services/socket';
 
 function App() {
@@ -10,31 +8,40 @@ function App() {
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState('');
   const [username, setUsername] = useState('');
-  const chat = useRef(null);
-  const ws = useRef(null);
 
   useEffect(() => {
     connect();
   }, []);
 
   useEffect(() => {
-    subscribeToChat(data => setMessages([...messages, data]));
+    subscribeToChat(data => {
+      const msg = data;
+      msg["received"] = true;      
+      setMessages([...messages, msg])
+    });
   }, [messages]);
 
   function sendMessagea() {            
     sendMessage(message, username);
-    console.log(messages);
-
+    setMessages([...messages, {message, username, received: false}]);
     setMessage('');
   }
 
   return (
     <div className="App">
-      <ul>
-        {messages.map(content => (
-          <li>Nome: {content.username} - mensagem: {content.message}</li>
+      <div className="chat">
+        {messages.map(content => ( 
+          <div className={(content.received) ? "left" : "right"}>
+            <div className={(content.received) ? "baloon baloon-sent" : "baloon"}>
+              <p className="name">{content.username}</p>
+              <p className="message">{content.message}</p>
+            </div>
+          </div>
+          
         ))}
-      </ul>
+      </div>
+        
+      
       <input type="text" 
               placeholder="Username"
               value={username}
