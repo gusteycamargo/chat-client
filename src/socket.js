@@ -19,6 +19,10 @@ export default function SocketConnection() {
         return ws
     }
 
+    function sendMessage(message) {            
+        ws.emit("message", message);
+      }
+
     function subscribe () {
         
         const result = ws.subscribe("chat")
