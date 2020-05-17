@@ -42,20 +42,22 @@ function App() {
       </div>
         
       
-      <input type="text" 
-              placeholder="Username"
-              value={username}
-              name="Username"
-              onChange={e => setUsername(e.target.value)}
-        ></input>
-       
-       <input type="text" 
-              placeholder="Mensagem"
-              value={message}
-              name="Message"
-              onChange={e => setMessage(e.target.value)}
-        ></input>
-        <button onClick={sendMessagea}>Enviar</button>
+      <div className="inputs">
+        <input type="text" 
+                placeholder="Username"
+                value={username}
+                name="Username"
+                onChange={e => setUsername(e.target.value)}
+          ></input>
+        
+        <input type="text" 
+                placeholder="Mensagem"
+                value={message}
+                name="Message"
+                onChange={e => setMessage(e.target.value)}
+          ></input>
+          <button onClick={sendMessagea}>Enviar</button>
+      </div>
     </div>
   );
 }
