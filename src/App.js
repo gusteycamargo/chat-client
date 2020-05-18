@@ -26,7 +26,8 @@ function App() {
     });
   }, [messages]);
 
-  function sendMessagea() {            
+  function sendMessagea(e) { 
+    e.preventDefault()           
     sendMessage(message, username);
     setMessages([...messages, {message, username, received: false}]);
     setMessage('');
@@ -48,20 +49,24 @@ function App() {
         
       
       <div className="inputs">
-        <input type="text" 
-                placeholder="Username"
-                value={username}
-                name="Username"
-                onChange={e => setUsername(e.target.value)}
-          ></input>
-        
-        <input type="text" 
-                placeholder="Mensagem"
-                value={message}
-                name="Message"
-                onChange={e => setMessage(e.target.value)}
-          ></input>
-          <button onClick={sendMessagea}>Enviar</button>
+        <form onSubmit={sendMessagea}>
+          <input type="text" 
+                  className="username"
+                  placeholder="Username"
+                  value={username}
+                  name="Username"
+                  onChange={e => setUsername(e.target.value)}
+            ></input>
+          
+          <input type="text" 
+                  className="message"
+                  placeholder="Mensagem"
+                  value={message}
+                  name="Message"
+                  onChange={e => setMessage(e.target.value)}
+            ></input>
+            <button type="submit" className="hidden">Enviar</button>
+        </form>
       </div>
     </div>
   );
