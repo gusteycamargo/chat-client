@@ -1,14 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import './App.css';
 import { connect, disconnect, subscribeToChat, sendMessage } from './services/socket';
 
 function App() {
   
-
+  const messagesEndRef = useRef(null)
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState('');
   const [username, setUsername] = useState('');
+  const scrollToBottom = () => {
+    messagesEndRef.current.scrollIntoView({ behavior: "smooth" })
+  }
 
+  useEffect(scrollToBottom, [messages]);
+  
   useEffect(() => {
     connect();
   }, []);
@@ -37,8 +42,8 @@ function App() {
               <p className="message">{content.message}</p>
             </div>
           </div>
-          
         ))}
+        <div ref={messagesEndRef} />
       </div>
         
       
