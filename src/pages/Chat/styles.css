@@ -1,0 +1,106 @@
+.App {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .baloon {
+    background-color: #dddddd;
+    border-width: 5px;
+    border-color: #333;
+    border-radius: 4px;
+    margin: 10px 0;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    width: auto;
+  }
+  
+  .baloon p {
+    margin: 0;
+  }
+  
+  .name {
+    color: #333;
+    font-size: 14px;
+    padding-bottom: 10px;
+  }
+  
+  .baloon-sent {
+    background-color: #009b67;
+    justify-content: flex-end;
+  }
+  
+  .right {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .left {
+    display: flex;
+    justify-content: flex-start;
+  }
+  
+  .chat {
+    width: 70%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;  
+    overflow: auto;
+    background-color: #CCC;
+    border-radius: 10px;
+    padding: 0 15px;
+    margin-top: 20px;
+  }
+  
+  .inputs {
+    width: calc(70% + 30px);
+    margin-top: 20px;
+    padding-bottom: 20px;
+  }
+  
+  .username {
+    width: 35%;
+    margin-right: 20px;
+  }
+  
+  .message {
+    width: calc(63% - 20px);
+  }
+  
+  .inputs form {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+  }
+  
+  .inputs input {
+    padding: 15px 20px;
+    border-radius: 5px;
+    background-color: #CCC;
+    align-self: stretch;
+    margin-bottom: 15px;
+    font-size: 16px;
+    border: none;
+  }
+  
+  .inputs input:focus {
+    border-width: 1px;
+    border-color: #a0aec0;
+    background-color: #dfdfdf;
+    outline: 0;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  .ntg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
