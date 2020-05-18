@@ -36,6 +36,11 @@ function App() {
   return (
     <div className="App">
       <div className="chat">
+        {(messages.length <= 0) && 
+          <div className="ntg">
+            <p>Sem mensagens ainda!</p>
+          </div>
+        }
         {messages.map(content => ( 
           <div className={(content.received) ? "left" : "right"}>
             <div className={(content.received) ? "baloon baloon-sent" : "baloon"}>
